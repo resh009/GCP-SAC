@@ -41,7 +41,6 @@ variable "luminate_group" {
 variable "github_secrets" {
     description = "Variables from GitHub"
     //default = ${{ GCP_SECRET}}
-    }
 }
 variable "git_repo" {
   default = ""
