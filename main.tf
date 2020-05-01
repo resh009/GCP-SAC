@@ -29,7 +29,6 @@ variable "image" {
 variable "tenant_domain" {
   default = "symcmwinslow.luminatesite.com"
 }
-
 variable "luminate_user" {
   default = "michael.winslow@broadcom.com"
   //default = "mikewinslow@symcmwinslow.luminatesite.com"
@@ -37,6 +36,10 @@ variable "luminate_user" {
 variable "luminate_group" {
   default = "Developers"
   //default = "Developer"
+}
+// Github
+variable "github-token" {
+  default = ${{ secrets.GITHUB_TOKEN }}
 }
 variable "git_repo" {
   default = ""
@@ -48,6 +51,7 @@ variable "git_branch" {
 // Configure the Google Cloud provider
 provider "google" {
  //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
+ credentials = base64decode([var.GITHUB_TOKEN)
  project     = var.project
  region      = var.region
 }
