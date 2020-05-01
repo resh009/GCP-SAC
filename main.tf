@@ -58,6 +58,13 @@ provider "google" {
  region      = var.region
 }
 
+terraform {
+  backend "gcs" {
+    bucket  = "mwinslow-tf-state-prod"
+    prefix  = "terraform/state"
+  }
+}
+
 // Terraform plugin for creating random ids
 resource "random_id" "instance_id" {
  byte_length = 8
