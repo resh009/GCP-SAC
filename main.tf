@@ -29,10 +29,7 @@ variable "image" {
 variable "tenant_domain" {
   default = "symcmwinslow.luminatesite.com"
 }
-//variable "identity_provider" {
-  //default = "My-SAC-Okta"
-  //default = "local"
-//}
+
 variable "luminate_user" {
   default = "michael.winslow@broadcom.com"
   //default = "mikewinslow@symcmwinslow.luminatesite.com"
@@ -81,18 +78,6 @@ metadata_startup_script = file("scripts/install-deps.sh")
 
 }
 
-//data "template_file" "user-data" {
-  //template = file("tf-tpl/user-data.tpl")
-  //vars = {
-    //config_script_64   = base64encode(data.template_file.fixtures-config.rendered)
-    //config_script_path = "/tmp/node-config.sh"
-  //}
-//}
-
-//data "template_file" "fixtures-config" {
-  //template = file("./tf-tpl/config-node.sh.tpl")
-//}
-
 // Secure Access Cloud (luminate) provider
 
 provider "luminate" {
@@ -116,7 +101,7 @@ resource "luminate_web_application" "nginx" {
 }
 
 resource "luminate_web_access_policy" "web-access-policy" {
-  name                 = "AWS-DEV-access-policy"
+  name                 = "GCP-DEV-access-policy"
   identity_provider_id = data.luminate_identity_provider.idp.identity_provider_id
   user_ids             = data.luminate_user.users.user_ids
   group_ids            = data.luminate_group.groups.group_ids
@@ -144,3 +129,7 @@ data "luminate_group" "groups" {
 output "nginx-demo-url" {
   value = luminate_web_application.nginx.external_address
 }
+
+//GCP json key.
+// b64 encode the file then put into the secrets
+// then decrypt on the fly for auth
