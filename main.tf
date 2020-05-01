@@ -47,7 +47,7 @@ variable "git_branch" {
 
 // Configure the Google Cloud provider
 provider "google" {
- credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
+ //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
  project     = var.project
  region      = var.region
 }
