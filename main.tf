@@ -40,7 +40,7 @@ variable "luminate_group" {
 // Github
 variable "github_secrets" {
     description = "Variables from GitHub"
-    type = "map"
+    type = map(string)
     default = {
         secret_1 = "$GCP_SECRET"
     }
