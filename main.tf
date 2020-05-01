@@ -40,7 +40,7 @@ variable "luminate_group" {
 // Github
 variable "github_secrets" {
     description = "Variables from GitHub"
-    default = ${{ GCP_SECRET}}
+    //default = ${{ GCP_SECRET}}
     }
 }
 variable "git_repo" {
@@ -52,8 +52,8 @@ variable "git_branch" {
 
 // Configure the Google Cloud provider
 provider "google" {
- //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
- credentials = base64decode(var.github_secrets)
+ credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
+ //credentials = base64decode(var.github_secrets)
  project     = var.project
  region      = var.region
 }
