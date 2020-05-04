@@ -10,6 +10,7 @@ jobs:
     - name: Install Terraform
       env:
             TERRAFORM_VERSION: "0.12.24"
+            PASSPHRASE: ${{ secrets.SECRES_PASS }}
       run: |
         tf_version=$TERRAFORM_VERSION
         wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
@@ -27,7 +28,6 @@ jobs:
       run: terraform --version
     - name: Terraform init
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: file($HOME/secrets/gcp_cred.json)
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -36,7 +36,6 @@ jobs:
     - name: Terraform validation
       run: terraform validate
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -44,7 +43,6 @@ jobs:
     - name: Terraform apply
       run: terraform apply -auto-approve -input=false
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -61,7 +59,6 @@ jobs:
           "body": "Please visit the current build at '"$SITE_URL"'"
           }'
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
