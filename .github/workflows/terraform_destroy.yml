@@ -27,7 +27,7 @@ jobs:
       run: terraform --version
     - name: Terraform init
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcp_cred.json)
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcp_cred.json
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
