@@ -37,11 +37,6 @@ variable "luminate_group" {
   default = "Developers"
   //default = "Developer"
 }
-// Github
-//variable "github_secrets" {
-    //description = "Variables from GitHub"
-    //default = ${{ GCP_SECRET}}
-//}
 variable "git_repo" {
   default = ""
 }
@@ -86,8 +81,21 @@ network_interface {
     }
 }
 
-metadata_startup_script = file("scripts/install-deps.sh")
+//metadata_startup_script = file("scripts/install-deps.sh")
+  //vars = {
+    //connector_command = luminate_connector.connector.command
+    //git_repo = var.git_repo
+    //git_branch = var.git_branch
+  //}
 
+data "template_file" "fixtures-config" {
+  //template = file("tf-tpl/config-node.sh.tpl")
+  template = file("scripts/install-deps.sh")
+  vars = {
+    connector_command = luminate_connector.connector.command
+    git_repo = var.git_repo
+    git_branch = var.git_branch
+  }
 }
 
 // Secure Access Cloud (luminate) provider
