@@ -51,18 +51,18 @@ variable "git_branch" {
 
 // Configure the Google Cloud provider
 provider "google" {
- credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
+ //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
  //credentials = base64decode(var.github_secrets)
  project     = var.project
  region      = var.region
 }
 
-//terraform {
-  //backend "gcs" {
-    //bucket  = "mwinslow-tf-state-prod"
-    //prefix  = "terraform/state"
-  //}
-//}
+terraform {
+  backend "gcs" {
+    bucket  = "mwinslow-tf-state-prod"
+    prefix  = "terraform/state"
+  }
+}
 
 // Terraform plugin for creating random ids
 resource "random_id" "instance_id" {

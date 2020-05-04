@@ -26,7 +26,7 @@ jobs:
       run: terraform --version
     - name: Terraform init
       env:
-        GCP_SECRET: ${{ secrets.GCP_SECRET }}
+        GCP_SECRET: yamldecode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -35,7 +35,7 @@ jobs:
     - name: Terraform validation
       run: terraform validate
       env:
-        GCP_SECRET: ${{ secrets.GCP_SECRET }}
+        GCP_SECRET: yamldecode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -43,7 +43,7 @@ jobs:
     - name: Terraform apply
       run: terraform apply -auto-approve -input=false
       env:
-        GCP_SECRET: ${{ secrets.GCP_SECRET }}
+        GCP_SECRET: yamldecode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -60,7 +60,7 @@ jobs:
           "body": "Please visit the current build at '"$SITE_URL"'"
           }'
       env:
-        GCP_SECRET: ${{ secrets.GCP_SECRET }}
+        GCP_SECRET: yamldecode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
