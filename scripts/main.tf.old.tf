@@ -6,37 +6,72 @@
 | E-mail: michael.winslow@broadcom.com  |
 \---------------------------------------/
 */
-//Main Action
 
-# This is the provider used to spin up the gcloud instance
-provider "google" {
-  project = var.project_name
-  region  = var.region_name
-  zone    = var.zone_name
+// Variables
+//
+// GCP
+variable "project" {
+    default = "demos-sed-isg-integdemo"
+}
+variable "region" {
+    default = "us-west1"
+}
+variable "zone" {
+    default = "us-west1-a"
+}
+variable "machine_type" {
+    default = "f1-micro"
+}
+variable "image" {
+    default = "ubuntu-os-cloud/ubuntu-1804-lts"
+}
+// Secure Access Cloud
+variable "tenant_domain" {
+  default = "symcmwinslow.luminatesite.com"
+}
+variable "luminate_user" {
+  default = "michael.winslow@broadcom.com"
+  //default = "mikewinslow@symcmwinslow.luminatesite.com"
+}
+variable "luminate_group" {
+  default = "Developers"
+  //default = "Developer"
+}
+variable "git_repo" {
+  default = ""
+}
+variable "git_branch" {
+  default = ""
 }
 
-# Locks the version of Terraform for this particular use case
+// Configure the Google Cloud provider
+provider "google" {
+ //credentials = file("$GITHUB_WORKSPACE/gcp_cred.json")
+ //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
+ project     = var.project
+ region      = var.region
+}
+
 terraform {
-  required_version = "~>0.12.0"
-    backend "gcs" {
+  backend "gcs" {
     bucket  = "mwinslow-tf-state-prod"
     prefix  = "terraform/state"
   }
 }
 
-# Terraform plugin for creating random ids
+// Terraform plugin for creating random ids
 resource "random_id" "instance_id" {
  byte_length = 8
 }
 
-# This creates the google instance
+// A single Google Cloud Engine instance
 resource "google_compute_instance" "default" {
     name = "sac-dev-vm-${random_id.instance_id.hex}"
-    machine_type = var.machine_size
-    zone = var.zone_name
+    machine_type = var.machine_type
+    zone = var.zone
 boot_disk {
     initialize_params {
-        image = var.image_name
+        image = var.image
     }
   }
 
@@ -45,13 +80,14 @@ network_interface {
     access_config {
     }
   }
-    metadata_startup_script = <<SCRIPT
+    metadata {
+        startup-script = <<SCRIPT
 ${file("${path.module}/scripts/install-deps.sh")}
-    git_repo = var.git_repo
-    git_branch = var.git_branch
+    //git_repo = var.git_repo
+    //git_branch = var.git_branch
 SCRIPT
     }
-
+}
 ### Startup Script
 //metadata_startup_script = file("scripts/install-deps.sh")
   //vars = {
@@ -70,10 +106,7 @@ SCRIPT
   //}
 //}
 
-# We create a public IP address for our google compute instance to utilize
-//resource "google_compute_address" "static" {
-//  name = "vm-public-address"
-//}
+
 
 // Secure Access Cloud (luminate) provider
 
@@ -120,3 +153,13 @@ data "luminate_group" "groups" {
   identity_provider_id = data.luminate_identity_provider.idp.identity_provider_id
   groups               = [var.luminate_group]
 }
+
+// Output variables
+
+output "nginx-demo-url" {
+  value = luminate_web_application.nginx.external_address
+}
+
+//GCP json key.
+// b64 encode the file then put into the secrets
+// then decrypt on the fly for auth
