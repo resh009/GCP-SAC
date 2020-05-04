@@ -51,7 +51,7 @@ variable "git_branch" {
 
 // Configure the Google Cloud provider
 provider "google" {
- credentials = file("./secrets/gcp_cred.json")
+ credentials = file("./gcp_cred.json")
  //credentials = base64decode(var.github_secrets)
  //credentials = var.gcp_secret
  project     = var.project
