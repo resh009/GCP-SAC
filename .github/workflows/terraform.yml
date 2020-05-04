@@ -16,8 +16,6 @@ jobs:
         wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
         unzip terraform_"$tf_version"_linux_amd64.zip
         sudo mv terraform /usr/local/bin/
-        echo "$GCP_SECRET" | base64 -d > ./gcp_cred.json
-        cat ./gcp_cred.json
     - name: 'Install terraform-provider-luminate'
       run: |
           mkdir -p .terraform/plugins/linux_amd64/
@@ -33,7 +31,9 @@ jobs:
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
         TF_VAR_git_branch: ${{ github.head_ref }}
-      run: terraform init -input=false
+      run: |
+          echo "$GCP_SECRET" | base64 -d > $GITHUB_WORKSPACE/gcp_cred.json
+          terraform init -input=false
     - name: Terraform validation
       run: terraform validate
       env:
