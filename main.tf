@@ -53,6 +53,7 @@ variable "git_branch" {
 provider "google" {
  //credentials = file("/Users/mw731207/Documents/Keys/gcp/svc_acct-demos-sed-isg-integdemo-298522b5f4bf.json")
  //credentials = base64decode(var.github_secrets)
+ credentials = var.gcp_secret
  project     = var.project
  region      = var.region
 }
