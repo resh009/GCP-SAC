@@ -25,6 +25,8 @@ jobs:
     - name: Verify Terraform version
       run: terraform --version
     - name: Terraform init
+      run: |
+          echo ${{ secrets.GCP_SECRET }}
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SECRET }}
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
