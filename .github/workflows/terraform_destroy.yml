@@ -26,7 +26,7 @@ jobs:
       run: terraform --version
     - name: Terraform init
       env:
-        GCP_SECRET: base64decode(${{ secrets.GCP_SECRET }})
+        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -35,7 +35,7 @@ jobs:
     - name: Terraform validation
       run: terraform validate
       env:
-        GCP_SECRET: base64decode(${{ secrets.GCP_SECRET }})
+        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -43,7 +43,7 @@ jobs:
     - name: Terraform destroy plan
       run: terraform plan -destroy -out=./output.tfplan
       env:
-        GCP_SECRET: base64decode(${{ secrets.GCP_SECRET }})
+        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
@@ -51,7 +51,7 @@ jobs:
     - name: Terraform destroy
       run: terraform apply ./output.tfplan
       env:
-        GCP_SECRET: base64decode(${{ secrets.GCP_SECRET }})
+        GOOGLE_APPLICATION_CREDENTIALS: base64decode(${{ secrets.GCP_SECRET }})
         LUMINATE_API_CLIENT_ID: ${{ secrets.LUMINATE_API_CLIENT_ID }}
         LUMINATE_API_CLIENT_SECRET: ${{ secrets.LUMINATE_API_CLIENT_SECRET }}
         TF_VAR_git_repo: ${{ github.repository }}
