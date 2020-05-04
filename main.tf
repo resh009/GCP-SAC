@@ -47,8 +47,8 @@ network_interface {
   }
     metadata_startup_script = <<SCRIPT
 ${file("${path.module}/scripts/install-deps.sh")}
-    git_repo = var.git_repo
-    git_branch = var.git_branch
+    git_repo = $TF_VAR_git_repo
+    git_branch = $TF_VAR_git_branch
 SCRIPT
     }
 
