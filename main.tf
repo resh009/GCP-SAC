@@ -73,12 +73,13 @@ boot_disk {
     initialize_params {
         image = var.image
     }
-}
+  }
 
 network_interface {
     network = "default"
     access_config {
     }
+  }
 }
 
 //metadata_startup_script = file("scripts/install-deps.sh")
@@ -97,6 +98,7 @@ data "template_file" "fixtures-config" {
     git_branch = var.git_branch
   }
 }
+
 
 // Secure Access Cloud (luminate) provider
 
