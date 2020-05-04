@@ -40,7 +40,8 @@ variable "image_name" {
 
 variable "script_path" {
   //type        = "string"
-  description = "./scripts/install-deps.sh"
+  description = "Location of the Startup Script"
+  default     = "./scripts/install-deps.sh"
 }
 
 // Secure Access Cloud
