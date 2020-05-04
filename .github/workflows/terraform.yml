@@ -17,6 +17,7 @@ jobs:
         unzip terraform_"$tf_version"_linux_amd64.zip
         sudo mv terraform /usr/local/bin/
         echo "$GCP_SECRET" | base64 -d > ./gcp_cred.json
+        cat ./gcp_cred.json
     - name: 'Install terraform-provider-luminate'
       run: |
           mkdir -p .terraform/plugins/linux_amd64/
