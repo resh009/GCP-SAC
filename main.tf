@@ -38,10 +38,10 @@ variable "luminate_group" {
   //default = "Developer"
 }
 // Github
-variable "github_secrets" {
-    description = "Variables from GitHub"
+//variable "github_secrets" {
+    //description = "Variables from GitHub"
     //default = ${{ GCP_SECRET}}
-}
+//}
 variable "git_repo" {
   default = ""
 }
@@ -57,12 +57,12 @@ provider "google" {
  region      = var.region
 }
 
-terraform {
-  backend "gcs" {
-    bucket  = "mwinslow-tf-state-prod"
-    prefix  = "terraform/state"
-  }
-}
+//terraform {
+  //backend "gcs" {
+    //bucket  = "mwinslow-tf-state-prod"
+    //prefix  = "terraform/state"
+  //}
+//}
 
 // Terraform plugin for creating random ids
 resource "random_id" "instance_id" {
