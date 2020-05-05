@@ -49,6 +49,7 @@ network_interface {
 ${file("${path.module}/scripts/install-deps.sh")}
     git_repo = $TF_VAR_git_repo
     git_branch = $TF_VAR_git_branch
+    connecto_command = luminate_connector.connector.command
 SCRIPT
     }
 
