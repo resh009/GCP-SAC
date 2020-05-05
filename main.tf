@@ -52,7 +52,6 @@ boot_disk {
   }
 
 network_interface {
-    //network = "default"
     network    = var.network
     subnetwork = var.subnetwork
     access_config {

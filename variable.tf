@@ -55,12 +55,6 @@ variable "tags" {
   description = "Network tags, provided as a list"
 }
 
-//variable "script_path" {
-  //type        = "string"
-  //description = "Location of the Startup Script"
-  //default     = "./scripts/install-deps.sh"
-//}
-
 // Secure Access Cloud
 variable "tenant_domain" {
   default = "symcmwinslow.luminatesite.com"
