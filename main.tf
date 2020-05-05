@@ -1,6 +1,6 @@
 /*
 /---------------------------------------\
-| Terraform github actions demo         |
+| Terraform github actions demo - GCP   |
 |---------------------------------------|
 | Author: Mike Winslow                  |
 | E-mail: michael.winslow@broadcom.com  |
@@ -29,8 +29,8 @@ resource "random_id" "instance_id" {
  byte_length = 8
 }
 
+# Sets the Template File for the sartup script
 data "template_file" "startup_script" {
-  //template = file("tf-tpl/config-node.sh.tpl")
   template = file("scripts/install-deps.tpl")
   vars = {
     connector_command = luminate_connector.connector.command
@@ -57,31 +57,9 @@ network_interface {
   }
 
 metadata = {
-    //startup-script        = module.startup-scripts.content
     startup-script = data.template_file.startup_script.rendered
   }
-//metadata_startup_script = <<SCRIPT
-//${file("${path.module}/scripts/install-deps.sh")}
-  //vars = {
-    //connector_command = luminate_connector.connector.command
-    //git_repo = var.git_repo
-    //git_branch = var.git_branch
-  //}
-//SCRIPT
 }
-
-### Startup Script
-//metadata_startup_script = file("scripts/install-deps.sh")
-  //vars = {
-    //connector_command = luminate_connector.connector.command
-    //git_repo = var.git_repo
-    //git_branch = var.git_branch
-  //}
-
-# We create a public IP address for our google compute instance to utilize
-//resource "google_compute_address" "static" {
-//  name = "vm-public-address"
-//}
 
 // Secure Access Cloud (luminate) provider
 

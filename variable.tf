@@ -1,6 +1,6 @@
 /*
 /---------------------------------------\
-| Terraform github actions demo         |
+| Terraform github actions demo - GCP   |
 |---------------------------------------|
 | Author: Mike Winslow                  |
 | E-mail: michael.winslow@broadcom.com  |
@@ -38,11 +38,11 @@ variable "image_name" {
   default     = "ubuntu-os-cloud/ubuntu-1804-lts"
 }
 
-variable "script_path" {
+//variable "script_path" {
   //type        = "string"
-  description = "Location of the Startup Script"
-  default     = "./scripts/install-deps.sh"
-}
+  //description = "Location of the Startup Script"
+  //default     = "./scripts/install-deps.sh"
+//}
 
 // Secure Access Cloud
 variable "tenant_domain" {

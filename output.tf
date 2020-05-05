@@ -1,12 +1,12 @@
 /*
 /---------------------------------------\
-| Terraform github actions demo         |
+| Terraform github actions demo - GCP   |
 |---------------------------------------|
 | Author: Mike Winslow                  |
 | E-mail: michael.winslow@broadcom.com  |
 \---------------------------------------/
 */
-//Output
+//Outputs
 
 output "nginx-demo-url" {
   value = luminate_web_application.nginx.external_address
