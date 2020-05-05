@@ -29,6 +29,16 @@ resource "random_id" "instance_id" {
  byte_length = 8
 }
 
+data "template_file" "startup_script" {
+  //template = file("tf-tpl/config-node.sh.tpl")
+  template = file("scripts/install-deps.tpl")
+  vars = {
+    connector_command = luminate_connector.connector.command
+    git_repo = var.git_repo
+    git_branch = var.git_branch
+  }
+}
+
 # This creates the google instance
 resource "google_compute_instance" "default" {
     name = "sac-dev-vm-${random_id.instance_id.hex}"
@@ -45,14 +55,19 @@ network_interface {
     access_config {
     }
   }
-    metadata_startup_script = <<SCRIPT
-${file("${path.module}/scripts/install-deps.sh")}
-  vars = {
-    connector_command = luminate_connector.connector.command
-    git_repo = var.git_repo
-    git_branch = var.git_branch
+
+metadata = {
+    //startup-script        = module.startup-scripts.content
+    startup-script = data.template_file.startup_script.rendered
   }
-SCRIPT
+//metadata_startup_script = <<SCRIPT
+//${file("${path.module}/scripts/install-deps.sh")}
+  //vars = {
+    //connector_command = luminate_connector.connector.command
+    //git_repo = var.git_repo
+    //git_branch = var.git_branch
+  //}
+//SCRIPT
 }
 
 ### Startup Script
@@ -62,16 +77,6 @@ SCRIPT
     //git_repo = var.git_repo
     //git_branch = var.git_branch
   //}
-
-//data "template_file" "fixtures-config" {
-  //template = file("tf-tpl/config-node.sh.tpl")
-  //template = file("scripts/install-deps.sh")
-  //vars = {
-    //connector_command = luminate_connector.connector.command
-    //git_repo = var.git_repo
-    //git_branch = var.git_branch
-  //}
-//}
 
 # We create a public IP address for our google compute instance to utilize
 //resource "google_compute_address" "static" {
@@ -123,3 +128,12 @@ data "luminate_group" "groups" {
   identity_provider_id = data.luminate_identity_provider.idp.identity_provider_id
   groups               = [var.luminate_group]
 }
+
+//data "template_file" "startup_script" {
+  //template = "${file("${path.module}/scripts/install-deps.sh")}"
+  //vars = {
+    //connector_command = luminate_connector.connector.command
+    //git_repo = var.git_repo
+    //git_branch = var.git_branch
+  //}
+//}
