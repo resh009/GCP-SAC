@@ -44,6 +44,7 @@ resource "google_compute_instance" "default" {
     name = "sac-dev-vm-${random_id.instance_id.hex}"
     machine_type = var.machine_size
     zone = var.zone_name
+    tags     = var.tags
 boot_disk {
     initialize_params {
         image = var.image_name
@@ -54,7 +55,6 @@ network_interface {
     //network = "default"
     network    = var.network
     subnetwork = var.subnetwork
-    tags       = var.tags
     access_config {
     }
   }
