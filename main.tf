@@ -52,7 +52,8 @@ boot_disk {
 
 network_interface {
     //network = "default"
-    network = "mw-cicd-lockdown"
+    network    = "mw-isg-intgdemo"
+    subnetwork = "mw-cicd-lockdown"
     access_config {
     }
   }
