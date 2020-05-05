@@ -39,6 +39,21 @@ variable "image_name" {
   default     = "ubuntu-os-cloud/ubuntu-1804-lts"
 }
 
+variable "network" {
+  description = "The name of the subnetwork create this instance in."
+  default     = "mw-isg-intgdemo"
+}
+
+variable "subnetwork" {
+  description = "The name of the subnetwork create this instance in."
+  default     = "mw-cicd-lockdown"
+}
+
+variable "tags" {
+  type        = list(cicd-allow-int,cicd-block-ext)
+  description = "Network tags, provided as a list"
+}
+
 //variable "script_path" {
   //type        = "string"
   //description = "Location of the Startup Script"
