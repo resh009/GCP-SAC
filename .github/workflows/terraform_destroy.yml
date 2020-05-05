@@ -10,6 +10,7 @@ jobs:
     - name: Install Terraform
       env:
             TERRAFORM_VERSION: "0.12.24"
+            GCP_SECRET: ${{ secrets.GCP_SECRET }}
       run: |
         tf_version=$TERRAFORM_VERSION
         wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip

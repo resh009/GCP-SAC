@@ -47,11 +47,13 @@ network_interface {
   }
     metadata_startup_script = <<SCRIPT
 ${file("${path.module}/scripts/install-deps.sh")}
-    git_repo = $TF_VAR_git_repo
-    git_branch = $TF_VAR_git_branch
-    connecto_command = luminate_connector.connector.command
+  vars = {
+    connector_command = luminate_connector.connector.command
+    git_repo = var.git_repo
+    git_branch = var.git_branch
+  }
 SCRIPT
-    }
+}
 
 ### Startup Script
 //metadata_startup_script = file("scripts/install-deps.sh")
