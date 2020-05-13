@@ -19,6 +19,7 @@ jobs:
         echo $GITHUB_WORKSPACE
         echo $GCP_SECRET
         echo "$GCP_SECRET" | base64 -d > $GITHUB_WORKSPACE/gcp_cred.json
+        cat $GITHUB_WORKSPACE/gcp_cred.json
     - name: 'Install terraform-provider-luminate'
       run: |
           mkdir -p .terraform/plugins/linux_amd64/
