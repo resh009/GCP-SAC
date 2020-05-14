@@ -108,12 +108,3 @@ data "luminate_group" "groups" {
   identity_provider_id = data.luminate_identity_provider.idp.identity_provider_id
   groups               = [var.luminate_group]
 }
-
-//data "template_file" "startup_script" {
-  //template = "${file("${path.module}/scripts/install-deps.sh")}"
-  //vars = {
-    //connector_command = luminate_connector.connector.command
-    //git_repo = var.git_repo
-    //git_branch = var.git_branch
-  //}
-//}
