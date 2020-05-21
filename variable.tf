@@ -60,7 +60,7 @@ variable "tenant_domain" {
   default = "symcrbrown.luminatesite.com"
 }
 variable "luminate_user" {
-  default = "joe@tssecurity.co.il"
+  default = "joe@TSsecurity.co.il"
 }
 variable "luminate_group" {
   default = "Admins"
