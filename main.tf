@@ -19,7 +19,7 @@ provider "google" {
 terraform {
   required_version = "~>0.12.0"
     backend "gcs" {
-    bucket  = "mwinslow-tf-state-prod"
+    bucket  = "sacbucket1"
     prefix  = "terraform/state"
   }
 }
@@ -95,7 +95,7 @@ resource "luminate_web_access_policy" "web-access-policy" {
 
 // Change for Account in SAC
 data "luminate_identity_provider" "idp" {
-  identity_provider_name = "My-SAC-Okta"
+  identity_provider_name = "azure-ad"
   //identity_provider_name = "local"
 }
 
