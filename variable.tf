@@ -11,7 +11,7 @@
 variable "project_name" {
   //type        = "string"
   description = "The name of the project to instanciate the instance at."
-  default     = "demos-sed-isg-integdemo"
+  default     = "tssecurity-276816"
 }
 
 variable "region_name" {
@@ -23,7 +23,7 @@ variable "region_name" {
 variable "zone_name" {
   //type        = "string"
   description = "The zone that this terraform configuration will instanciate at."
-  default     = "us-west1-a"
+  default     = "europe-west1-b"
 }
 
 variable "machine_size" {
@@ -41,12 +41,12 @@ variable "image_name" {
 
 variable "network" {
   description = "The name of the subnetwork create this instance in."
-  default     = "mw-isg-intgdemo"
+  default     = "default"
 }
 
 variable "subnetwork" {
   description = "The name of the subnetwork create this instance in."
-  default     = "mw-cicd-lockdown"
+  default     = "ci-cd"
 }
 
 variable "tags" {
@@ -57,14 +57,14 @@ variable "tags" {
 
 // Secure Access Cloud
 variable "tenant_domain" {
-  default = "symcmwinslow.luminatesite.com"
+  default = "symcrbrown.luminatesite.com"
 }
 variable "luminate_user" {
-  default = "michael.winslow@broadcom.com"
+  default = "joe@tssecurity.co.il"
   //default = "mikewinslow@symcmwinslow.luminatesite.com"
 }
 variable "luminate_group" {
-  default = "Developers"
+  default = "Admins"
   //default = "Developer"
 }
 
