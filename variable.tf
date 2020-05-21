@@ -17,7 +17,7 @@ variable "project_name" {
 variable "region_name" {
   //type        = "string"
   description = "The region that this terraform configuration will instanciate at."
-  default     = "us-west1"
+  default     = "europe-west1"
 }
 
 variable "zone_name" {
@@ -61,7 +61,6 @@ variable "tenant_domain" {
 }
 variable "luminate_user" {
   default = "joe@tssecurity.co.il"
-  //default = "mikewinslow@symcmwinslow.luminatesite.com"
 }
 variable "luminate_group" {
   default = "Admins"
